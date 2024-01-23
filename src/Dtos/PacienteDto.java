@@ -61,8 +61,8 @@ public class PacienteDto {
 	public char getSexoBiologicoPaciente() {
 		return sexoBiologicoPaciente;
 	}
-	public void setSexoBiologicoPaciente(char sexoBiologicoPaciente) {
-		this.sexoBiologicoPaciente = sexoBiologicoPaciente;
+	public void setSexoBiologicoPaciente(String string) {
+		this.sexoBiologicoPaciente = string;
 	}
 	public String getEspeciePaciente() {
 		return especiePaciente;
