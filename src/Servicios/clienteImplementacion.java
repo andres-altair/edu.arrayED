@@ -22,7 +22,7 @@ public class clienteImplementacion implements clienteInterfaz {
 		String especie = scan.next();
 		nuevoPaciente.setEspeciePaciente(especie);
 		System.out.println("escribe el sexo ('m' o 'f')");
-		String sexo = scan.next();
+		char sexo = scan.next().charAt(0);
 		nuevoPaciente.setSexoBiologicoPaciente(sexo);
 		System.out.println("escribe la fecha de nacimiento");
 		String fecha = scan.next();
@@ -34,48 +34,58 @@ public class clienteImplementacion implements clienteInterfaz {
 	@Override
 	public void darAltaCliente(List<EsclavoDto> antiguoEsclavo, List<PacienteDto> antiguoPaciente) {
 		
-		//System.out.println("eres un nuevo (si o no)");
-				System.out.println("nombre del esclavo");
-				String respueta = scan.next();
-				EsclavoDto nuevoEsclavo = new EsclavoDto();
-				nuevoEsclavo = antiguoEsclavo();
-				if (respueta = nuevoEsclavo.getNombreEsclavo() )
-				{ 
-					
-				
-				
-				}else 
-				{
-					darAltaEsclavo(List<EsclavoDto> antiguoEsclavo);
+		PacienteDto paciente = new PacienteDto();
+		System.out.println("escribr el id");
+		paciente.setIdPaciente(scan.nextLong());
+		System.out.println("escribr el nombre");
+		paciente.setNombrePaciente(scan.next());
+		System.out.println("escribr el edad");
+		paciente.setEdadPaciente(scan.nextInt());
+		System.out.println("escribr el fecha de nacimiento");
+		paciente.setFchNacimientoPaciente(scan.next());
+		System.out.println("escribr el sexo");
+		paciente.setSexoBiologicoPaciente(scan.next().charAt(0));
+		System.out.println("escribr el especie");
+		paciente.setEspeciePaciente(scan.next());
+		System.out.println("existe el esclavo (s/n)");
+		if(scan.next().charAt(0) == 'n'){
+			paciente.setIdEsclavo( crearEclavo( antiguoEsclavo,scan));
+			
+		}else {
+			int contador= 0;
+			do {contador=0;
+			System.out.println("escribe el id del esclavo");
+			long idEsclavo = scan.nextLong();
+		
+			for(EsclavoDto esclavo : antiguoEsclavo) {
+				if(idEsclavo == esclavo.getIdEsclaco()) {
+					contador++;
+					paciente.setIdPaciente(idEsclavo);}
 				}
+			}while(contador==0);
+		}
 	}
 
-
-	@Override
-	public void darAltaEsclavo(List<EsclavoDto> antiguoEsclavo) {
-		
-		EsclavoDto nuevoEsclavo = crearEsclavo();
-		antiguoEsclavo.add(nuevoEsclavo);
-		
-	}
 	
-	private EsclavoDto crearEsclavo()
-	{
-		EsclavoDto nuevoEsclavo = new EsclavoDto();
+	private long crearEclavo(List<EsclavoDto> antiguoEsclavo, Scanner scan) {
+		
+		System.out.println("escribe el id");
+		long id = scan.nextLong();
 		
 		System.out.println("escribe el nombre");
 		String nombre = scan.next();
-		nuevoEsclavo.setNombreEsclavo(nombre);
+		
 		System.out.println("escribe el apellido");
 		String apellido = scan.next();
-		nuevoEsclavo.setApellidoEsclavo(apellido);
+		
 		System.out.println("escribe el dni");
 		String dni = scan.next();
-		nuevoEsclavo.setDniEsclavo(dni);
+		
 		System.out.println("escribe el nombre");
-		int tel = scan.nextInt()
-		nuevoEsclavo.setTlfEsclavo(dni);
-		return nuevoEsclavo;
+		String tel = scan.next();
+		
+		EsclavoDto nuevoEsclavo = new EsclavoDto(id,nombre,apellido,dni,tel);
+		return id;
 	}
 
 }
